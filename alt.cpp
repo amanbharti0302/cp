@@ -1,46 +1,39 @@
 #include<bits/stdc++.h>
-#define int long long
-#define IO   ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);std::ifstream infile("soln.in");if(infile.good()){assert(freopen("soln.in","r",stdin));assert(freopen("soln.out","w",stdout));}
+#if __has_include("commands/local/main.h")
+  #include "commands/local/main.h"
+#endif
 using namespace std;
 
-void cal();
+template<typename ...Args>void print(Args&&... values);
+#define int long long
+#define mod 1000000007
+const int M = 2e5+5;
 
-int calc(vector<int>v,vector<int>&arr,int n,int ans){
-  if(v.size()==0)return ans;
-  int temp = abs(v[1]-v[0]) + abs(arr[0]-v[1])+ans;
-  for(int i = 1;i<n;i++){
-    int tt = ans-abs(arr[i]-arr[i-1]);
-    temp = min(temp,abs(v[0]-arr[i-1]) + tt+ abs(v[1]-arr[i]));
+int n;
+
+void solve(){
+  cin>>n;
+  vector<int>s(n),f(n),ans(n);
+  for(auto &x: s)cin>>x;
+  for(auto &x: f)cin>>x;
+  int last = 0;
+  for(int i = 0;i<n;i++){
+    ans[i] = f[i]-max(s[i],last);
+    last = max(last,s[i])+ans[i];
   }
-  temp = min(temp,abs(v[1]-v[0]) + abs(arr[n-1]-v[1])+ans);
-  return temp;
+  for(auto x: ans)cout<<x<<" ";
+  cout<<endl;
 }
 
 int32_t main(){
-  IO
-
-  int tt;
-  cin>>tt;
-
-  while(tt--)cal();
-  return 0;
-}
-
-void cal(){
-  int minm = INT32_MAX, maxm = INT32_MIN;
-  int n,x;
-  cin>>n>>x;
-  vector<int>arr(n);
-  for(auto &xx:arr){
-    cin>>xx;
-    minm = min(minm,xx);
-    maxm = max(maxm,xx);
-  }
-
-  vector<int>p1,p2;
-  if(minm>1)p1.push_back(1),p1.push_back(min(minm-1,x));
-  if(maxm<x)p2.push_back(maxm+1),p2.push_back(x);
-
+  ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
   
-
+  int test=1;
+  cin>>test;
+  
+  while(test--)solve();
 }
+
+int power(int a,int b) {int res=1LL;while(b>0){if(b&1)res=(res*a);a=(a*a);b>>=1;}return res;}
+int powerwithmod(int a,int b) {int res=1;while(b>0){if(b&1)res=(res*a)%mod;a=(a*a)%mod;b>>=1;}return res%mod;}
+template<typename ...Args>void print(Args&&... values){(..., (cout<< values<<" ", true));cout<<endl;}

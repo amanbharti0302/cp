@@ -15,13 +15,13 @@ int main(){
   assert(freopen("soln.out","r",stdin));
   }
 
-  int tc = 10;
+  int tc = 100;
   cout<<tc<<endl;
 
   while(tc--){
-    int n = random(1,5);
-    cout<<n<<" "<<1<<endl;
-    for(int i = 0;i<n;i++)cout<<random(1,2e5)<<" ";    
+    int n = random(3,1000);
+    cout<<n<<endl;
+    for(int i = 0;i<n;i++)cout<<random(0,1e9)<<" ";    
     cout<<endl;
   }
 

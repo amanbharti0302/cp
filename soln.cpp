@@ -7,14 +7,33 @@ using namespace std;
 template<typename ...Args>void print(Args&&... values);
 #define int long long
 #define mod 1000000007
+int powerwithmod(int a,int b);
 const int M = 2e5+5;
 
+int n;
 
 void solve(){
-  
+  cin>>n;
+  if(n==7){
+    cout<<2<<" "<<4<<" "<<1<<endl;
+    return;
+  }
+  int a = n/3, b = n/3, c = n/3+(n%3);
+  vector<int>v = {a,b,c};
+  sort(v.begin(),v.end(),greater<int>());
+  swap(v[0],v[1]);
+
+  if(v[1]==v[0])v[1]++,v[2]--;
+  if(v[0]==v[2])v[0]++,v[2]--;
+  if(v[1]==v[0])v[1]++,v[2]--;
+
+
+  for(auto x: v)cout<<x<<" ";
+  cout<<endl;
 }
 
 int32_t main(){
+
   ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
   
   int test=1;
