@@ -1,87 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class User {
-  private:
+void solve(){
+  int n,k;
+  string s;
+  cin>>n>>k>>s;
 
-  int userId;
-  string name;
-  string email;
-  int mobilenumber;
+  int ind[26];
+  memset(ind,-1,sizeof(ind));
+  int dp[n+1] = {0};
+  int ans = 0;
 
-  public :
- 
-  int getuserId(){
-    return this->userId;
-  }
- 
-  string getname(){
-    return this->name;
-  }
- 
-  string getemail(){
-    return this->email;
-  }
- 
-  int getmobilenumber(){
-    return this->mobilenumber;
-  }
-
-  void setuserId(int userId){
-    this->userId = userId;
-  }
- 
-  void setname(string name){
-    this->name = name;
-  }
- 
-  void setemail(string email){
-    this->email = email;
-  }
- 
-  void setmobilenumber(int mobilenumber){
-    this->mobilenumber = mobilenumber;
+  for(int i = 0;i<n;i++){
+    char x = s[i];
+    int maxm = 1;
+    for(char j = 'a';j<='z';j++){
+      if(abs(j-x)>k)continue;
+      if(ind[j-'a']==-1)continue;
+      int index = ind[j-'a'];
+      if(dp[index]+1>maxm){
+        maxm = dp[index]+1;
+      }
+    }
+    ind[s[i]-'a'] = i;
+    dp[i] = maxm;
+    ans = max(ans,dp[i]);
   }
 
-  user(string name,string email,int mobilenumber){
-    setuserId(rand());
-    setname(name);
-    setemail(email);
-    setmobilenumber(mobilenumber);
-  }
-
-};
-
-
-class expense{
-  private:
-  int amount;
-  string date;
-  public:
-  int getamount(){
-    return this->amount;
-  }
-
-  string getDate(){
-    return thsi->date;
-  }
-
-  void setamount(int amount){
-    this->amount = amount;
-  }
-
-  void setDate(string date){
-    this->date = date;
-  }
-  
-};
-
-
-int32_t main(){
-
+  cout<<ans<<endl;
 }
 
+int main(){
+  ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 
-// user        userId , name  , email , mobile  number
-// Expense     EQUAL  , EXACT   or      PERCENT ------- amount -------- date + time
-//
+  int t;
+  cin>>t;
+  while(t--)solve();
+}
